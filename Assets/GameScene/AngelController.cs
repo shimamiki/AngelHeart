@@ -22,7 +22,7 @@ public class AngelController : MonoBehaviour {
 	//スコアを表示するテキスト
 	private GameObject scoreText;
 	//得点
-	private int score = 0;
+	public static int score = 0;
 
 	//左ボタン押下の判定
 	private bool isLButtonDown = false;
@@ -40,6 +40,8 @@ public class AngelController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		//scoreを初期化
+		score = 0;
 
 
 		//Rigidbodyコンポーネントを取得
@@ -65,7 +67,9 @@ public class AngelController : MonoBehaviour {
 
 
 		//Angelに前方向の力をくわえる
-		this.myRigidbody.AddForce (this.transform.forward * this.forwardForce);
+		this.myRigidbody.AddForce (this.transform.forward * this.forwardForce );
+
+		//this.myRigidbody.velocity = new Vector3(0,0,100);
 
 		//Angelを矢印キーに応じて移動させる
 		if ((Input.GetKey (KeyCode.LeftArrow) || this.isLButtonDown) && -this.movableRange < this.transform.position.x) {
@@ -74,12 +78,12 @@ public class AngelController : MonoBehaviour {
 		} else if ((Input.GetKey (KeyCode.RightArrow) || this.isRButtonDown) && this.movableRange > this.transform.position.x) {
 			//右に移動
 			this.myRigidbody.AddForce (this.turnForce, 0, 0);
-		} else if (Input.GetKey (KeyCode.DownArrow)) {
+		//} else if (Input.GetKey (KeyCode.DownArrow)) {
 			//後ろに移動
-			this.forwardForce *= this.coefficient;
-		}else if (Input.GetKey (KeyCode.UpArrow)) {
+			//this.forwardForce *= this.coefficient;
+		//}else if (Input.GetKey (KeyCode.UpArrow)) {
 			//前に移動
-			this.forwardForce /= this.coefficient;
+			//this.forwardForce /= this.coefficient;
 		}
 	}
 
@@ -96,10 +100,10 @@ public class AngelController : MonoBehaviour {
 		//ハートに衝突した場合
 		if(other.gameObject.tag == "HeartTag"){
 			//スコアを加算
-			this.score += 1;
+			score += 1;
 
 			//獲得したスコアを表示
-			this.scoreText.GetComponent<Text>().text = "×"+ this.score;
+			this.scoreText.GetComponent<Text>().text = "×"+ score;
 
 			//パーティクルを再生する
 			GetComponent<ParticleSystem>().Play();

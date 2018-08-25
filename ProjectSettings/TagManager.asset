@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HeartTag
   - GoalTag
+  - WallTag
   layers:
   - Default
   - TransparentFX

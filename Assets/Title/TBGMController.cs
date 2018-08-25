@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class TBGMController : MonoBehaviour {
 
-	//Angelのオブジェクト
-	public GameObject angel;
-	//AngelControllerを入れるコンポーネント
-	private TAngelController angelController;
 
 	//オーディオを入れる
 	private AudioSource audioSource;
@@ -15,11 +11,6 @@ public class TBGMController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-		//Angelのオブジェクトを取得
-		this.angel = GameObject.Find ("Angel");
-		//AngelControllerを取得
-		this.angelController =angel.GetComponent<TAngelController>();
 		//audioSourceにコンポーネント入れる
 		audioSource = gameObject.GetComponent<AudioSource>();
 		
@@ -28,11 +19,10 @@ public class TBGMController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (this.angelController.dead) {
-
-			audioSource.Play();
-			
-		}
 		
+	}
+
+	public void playbgm (){
+		audioSource.Play ();
 	}
 }

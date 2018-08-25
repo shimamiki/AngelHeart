@@ -7,24 +7,25 @@ public class TAngelController : MonoBehaviour {
 	//Angelの移動速度
 	private float speed = 0.2f;
 
-	//消滅位置
+	//停止位置
 	private float deadLine = -50;
 
 	//オーディオコンポーネントを入れる
 	public AudioSource sound1;
-	//public AudioSource sound2;
 
-	//消滅
-	public bool dead = false;
+	//Angelのオブジェクト
+	public GameObject bgmController;
 
+	private TBGMController tbgmController;
 
 	// Use this for initialization
 	void Start () {
 
-		//オーディオコンポーネントを取得
-//		AudioSource[] audioSources = GetComponents<AudioSource>();
-//		sound1 = audioSources [0];
-//		sound2 = audioSources [2];
+	
+		//Angelのオブジェクトを取得
+		this.bgmController = GameObject.Find ("BGMController");
+		//AngelControllerを取得
+		this.tbgmController =bgmController.GetComponent<TBGMController>();
 		
 	}
 	
@@ -33,14 +34,13 @@ public class TAngelController : MonoBehaviour {
 		//Angelを移動させる
 		transform.Translate (0,0,this.speed);
 
-		//画面外に出たら破棄する
+		//画面外に出たらストップしてｂｇｍを流す
 		if(transform.position.x < this.deadLine){
 
-			//deadをtrueにする
-			this.dead = true;
-			//BGM鳴らす
-			//sound2.PlayOneShot(sound2.clip);
 			Destroy (gameObject);
+
+			tbgmController.playbgm();
+
 
 		}
 		
